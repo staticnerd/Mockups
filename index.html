@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventographyByAK | Luxury Event Coordination</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .glass { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(12px); }
+        .bg-gold { color: #d4af37; }
+        .border-gold { border-color: rgba(212, 175, 55, 0.2); }
+        
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        .animate-zoom { animation: slowZoom 20s infinite alternate ease-in-out; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-2xl font-serif tracking-[0.2em] uppercase">
+                Eventography<span class="text-amber-500">ByAK</span>
+            </div>
+            <div class="hidden md:flex space-x-10 text-xs uppercase tracking-[0.2em] text-gray-400">
+                <a href="#about" class="hover:text-amber-500 transition">About</a>
+                <a href="#services" class="hover:text-amber-500 transition">Services</a>
+                <a href="#portfolio" class="hover:text-amber-500 transition">Portfolio</a>
+                <a href="#contact" class="hover:text-amber-500 transition">Contact</a>
+            </div>
+            <button class="md:hidden"><i data-lucide="menu"></i></button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-black/60 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80" 
+                 class="w-full h-full object-cover animate-zoom" alt="Hero">
+        </div>
+
+        <div class="relative z-20 text-center px-6 max-w-5xl">
+            <p class="reveal text-amber-500 tracking-[0.4em] uppercase text-xs mb-6">Capturing Moments. Coordinating Experiences.</p>
+            <h1 class="reveal text-5xl md:text-8xl font-serif mb-10 leading-tight">
+                Luxury Event Coordination & <br> 
+                <span class="italic text-gray-400">Creative Storytelling</span>
+            </h1>
+            <div class="reveal flex flex-col md:row gap-5 justify-center">
+                <a href="#portfolio" class="bg-amber-600 hover:bg-amber-700 text-white px-12 py-4 rounded-full transition-all text-sm uppercase tracking-widest">View Portfolio</a>
+                <a href="#contact" class="border border-white/20 hover:bg-white/10 px-12 py-4 rounded-full transition-all text-sm uppercase tracking-widest">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div class="reveal-left">
+                <h2 class="text-amber-500 uppercase tracking-[0.3em] text-xs mb-4 font-bold">The Essence</h2>
+                <h3 class="text-4xl md:text-5xl font-serif mb-8 italic">Where your vision meets <br> seamless execution.</h3>
+                <p class="text-gray-400 leading-relaxed text-lg mb-10">
+                    EventographyByAK bridges the gap between high-end event logistics and cinematic content. 
+                    We don't just plan events; we architect experiences that look as good in person as they do on camera.
+                </p>
+                <div class="grid grid-cols-2 gap-10 border-t border-white/10 pt-10">
+                    <div>
+                        <span class="text-4xl font-serif text-amber-500">150+</span>
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mt-2">Curated Events</p>
+                    </div>
+                    <div>
+                        <span class="text-4xl font-serif text-amber-500">50M+</span>
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mt-2">Views Generated</p>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal-right relative">
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" 
+                     class="rounded-3xl shadow-2xl" alt="Coordination">
+                <div class="absolute -bottom-10 -left-10 bg-amber-600 p-10 rounded-2xl hidden lg:block">
+                    <i data-lucide="camera" class="w-10 h-10"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-32 px-6 bg-zinc-950">
+        <div class="max-w-7xl mx-auto text-center mb-20">
+            <h2 class="reveal text-4xl md:text-6xl font-serif italic">Bespoke Offerings</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            <!-- Card 1 -->
+            <div class="reveal-up p-10 bg-black border border-white/5 rounded-3xl hover:border-amber-500/40 transition-all duration-500">
+                <i data-lucide="calendar" class="text-amber-500 mb-6"></i>
+                <h4 class="text-2xl font-serif mb-4">Event Management</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Full-service coordination from concept to clean-up. We handle the stress, you handle the memories.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="reveal-up p-10 bg-black border border-white/5 rounded-3xl hover:border-amber-500/40 transition-all duration-500" style="transition-delay: 0.1s;">
+                <i data-lucide="video" class="text-amber-500 mb-6"></i>
+                <h4 class="text-2xl font-serif mb-4">Content Strategy</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Tailored photography and viral-ready reels strategy designed specifically for social impact.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="reveal-up p-10 bg-black border border-white/5 rounded-3xl hover:border-amber-500/40 transition-all duration-500" style="transition-delay: 0.2s;">
+                <i data-lucide="heart" class="text-amber-500 mb-6"></i>
+                <h4 class="text-2xl font-serif mb-4">Luxury Weddings</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Specialized wedding coordination that focuses on storytelling, aesthetics, and high-end elegance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto glass p-12 md:p-20 rounded-[3rem] border border-white/10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif italic mb-4">Let's Create Magic</h2>
+                <p class="text-gray-400">Tell us about your next big experience.</p>
+            </div>
+            <form class="grid md:grid-cols-2 gap-8">
+                <input type="text" placeholder="Your Name" class="bg-transparent border-b border-white/20 py-4 outline-none focus:border-amber-500 transition">
+                <input type="email" placeholder="Email Address" class="bg-transparent border-b border-white/20 py-4 outline-none focus:border-amber-500 transition">
+                <select class="bg-transparent border-b border-white/20 py-4 outline-none focus:border-amber-500 transition text-gray-500">
+                    <option>Select Event Type</option>
+                    <option>Wedding</option>
+                    <option>Corporate Gala</option>
+                    <option>Private Party</option>
+                </select>
+                <input type="text" placeholder="Event Date" class="bg-transparent border-b border-white/20 py-4 outline-none focus:border-amber-500 transition">
+                <textarea placeholder="Your Vision" class="md:col-span-2 bg-transparent border-b border-white/20 py-4 outline-none focus:border-amber-500 transition h-32"></textarea>
+                <button class="md:col-span-2 bg-amber-600 py-5 rounded-full uppercase tracking-widest text-sm font-bold hover:bg-white hover:text-black transition-all">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-20 text-center border-t border-white/5">
+        <div class="text-2xl font-serif tracking-[0.3em] uppercase mb-10">Eventography<span class="text-amber-500">ByAK</span></div>
+        <div class="flex justify-center space-x-8 mb-10 text-gray-500">
+            <i data-lucide="instagram" class="hover:text-amber-500 cursor-pointer"></i>
+            <i data-lucide="mail" class="hover:text-amber-500 cursor-pointer"></i>
+            <i data-lucide="phone" class="hover:text-amber-500 cursor-pointer"></i>
+        </div>
+        <p class="text-[10px] uppercase tracking-widest text-gray-600">© 2026 EventographyByAK | Designed for Excellence</p>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Scroll Reveal Animations
+        ScrollReveal().reveal('.reveal', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000 });
+        ScrollReveal().reveal('.reveal-left', { delay: 300, distance: '80px', origin: 'left', duration: 1200 });
+        ScrollReveal().reveal('.reveal-right', { delay: 300, distance: '80px', origin: 'right', duration: 1200 });
+        ScrollReveal().reveal('.reveal-up', { delay: 200, distance: '60px', origin: 'bottom', duration: 1000, interval: 200 });
+    </script>
+</body>
+</html>
