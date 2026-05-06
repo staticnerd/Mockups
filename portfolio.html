@@ -10,21 +10,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; cursor: none; }
         .font-serif { font-family: 'Cormorant Garamond', serif; }
         .glass { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(12px); }
         
-        /* Portfolio Hover Effect */
+        /* Custom Cursor */
+        #cursor {
+            width: 20px; height: 20px; border: 1px solid #d4af37;
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transition: transform 0.1s ease, background 0.3s ease;
+        }
+
+        /* Portfolio Item Transition */
+        .portfolio-item-wrapper {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .portfolio-item img { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-        .portfolio-item:hover img { transform: scale(1.08); }
+        .portfolio-item:hover img { transform: scale(1.1); }
+        
         .portfolio-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
         .portfolio-item:hover .portfolio-overlay { opacity: 1; }
 
-        /* Custom scrollbar for premium feel */
+        /* Custom scrollbar */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
@@ -32,15 +44,17 @@
 </head>
 <body class="overflow-x-hidden">
 
+    <div id="cursor" class="hidden md:block"></div>
+
     <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 glass border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-serif tracking-[0.2em] uppercase">
                 Eventography<span class="text-amber-500">ByAK</span>
             </a>
-            <div class="hidden md:flex space-x-10 text-xs uppercase tracking-[0.2em] text-gray-400">
+            <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.3em] text-gray-400">
                 <a href="index.html" class="hover:text-amber-500 transition">Home</a>
-                <a href="index.html#services" class="hover:text-amber-500 transition">Services</a>
+                <a href="index.html#about" class="hover:text-amber-500 transition">Essence</a>
                 <a href="#" class="text-amber-500">Portfolio</a>
                 <a href="index.html#contact" class="hover:text-amber-500 transition">Contact</a>
             </div>
@@ -51,74 +65,94 @@
     </nav>
 
     <!-- HEADER SECTION -->
-    <header class="pt-40 pb-20 px-6 text-center">
+    <header class="pt-48 pb-20 px-6 text-center">
         <div class="max-w-4xl mx-auto">
-            <p class="reveal text-amber-500 tracking-[0.4em] uppercase text-[10px] mb-4">Our Visual Legacy</p>
-            <h1 class="reveal text-5xl md:text-7xl font-serif italic mb-8">Selected Works</h1>
-            <div class="h-[1px] w-20 bg-amber-500 mx-auto mb-10"></div>
+            <p class="reveal text-amber-500 tracking-[0.4em] uppercase text-[10px] mb-4">A Visual Journey</p>
+            <h1 class="reveal text-6xl md:text-8xl font-serif italic mb-12 leading-tight">Selected Works</h1>
             
             <!-- Category Filter -->
             <div class="reveal flex flex-wrap justify-center gap-6 md:gap-12 text-[10px] uppercase tracking-[0.3em] text-gray-500">
-                <button class="hover:text-white transition text-amber-500 border-b border-amber-500 pb-1">All Work</button>
-                <button class="hover:text-white transition pb-1">Weddings</button>
-                <button class="hover:text-white transition pb-1">Corporate</button>
-                <button class="hover:text-white transition pb-1">Social</button>
-                <button class="hover:text-white transition pb-1">Short Films</button>
+                <button class="filter-btn active text-amber-500 border-b border-amber-500 pb-1 transition-all" data-filter="all">All Work</button>
+                <button class="filter-btn hover:text-white transition pb-1" data-filter="weddings">Weddings</button>
+                <button class="filter-btn hover:text-white transition pb-1" data-filter="corporate">Corporate</button>
+                <button class="filter-btn hover:text-white transition pb-1" data-filter="social">Social Events</button>
             </div>
         </div>
     </header>
 
     <!-- PORTFOLIO GRID -->
-    <section class="pb-32 px-4">
-        <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section class="pb-32 px-6">
+        <div id="portfolio-grid" class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <!-- Item 1 - Large Wedding -->
-            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl group lg:col-span-2 aspect-video md:aspect-auto">
-                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80" 
-                     class="w-full h-full object-cover" alt="Luxury Wedding">
-                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
-                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Wedding Coordination</span>
-                    <h3 class="text-3xl font-serif italic">The Grand Palace Union</h3>
+            <!-- Item 1 - Weddings -->
+            <div class="portfolio-item-wrapper" data-category="weddings">
+                <div class="portfolio-item relative overflow-hidden rounded-3xl aspect-[4/5] bg-zinc-900 group">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80" 
+                         class="w-full h-full object-cover" alt="Wedding">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
+                        <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Coordination</span>
+                        <h3 class="text-3xl font-serif italic">The Grand Palace Union</h3>
+                    </div>
                 </div>
             </div>
 
             <!-- Item 2 - Corporate -->
-            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-square">
-                <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80" 
-                     class="w-full h-full object-cover" alt="Corporate Event">
-                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
-                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Corporate Branding</span>
-                    <h3 class="text-2xl font-serif">TechSummit Global 2025</h3>
+            <div class="portfolio-item-wrapper" data-category="corporate">
+                <div class="portfolio-item relative overflow-hidden rounded-3xl aspect-[4/5] bg-zinc-900 group">
+                    <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80" 
+                         class="w-full h-full object-cover" alt="Corporate">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
+                        <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Content Strategy</span>
+                        <h3 class="text-3xl font-serif italic">Global Tech Summit</h3>
+                    </div>
                 </div>
             </div>
 
-            <!-- Item 3 - Content Creation -->
-            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-[4/5]">
-                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80" 
-                     class="w-full h-full object-cover" alt="Gala Night">
-                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
-                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Social Coverage</span>
-                    <h3 class="text-2xl font-serif">Midnight Gala Aftermovie</h3>
+            <!-- Item 3 - Social -->
+            <div class="portfolio-item-wrapper" data-category="social">
+                <div class="portfolio-item relative overflow-hidden rounded-3xl aspect-[4/5] bg-zinc-900 group">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80" 
+                         class="w-full h-full object-cover" alt="Social">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
+                        <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Social Coverage</span>
+                        <h3 class="text-3xl font-serif italic">Midnight Gala</h3>
+                    </div>
                 </div>
             </div>
 
-            <!-- Item 4 - Detail Shot -->
-            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-square">
-                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80" 
-                     class="w-full h-full object-cover" alt="Fashion Event">
-                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
-                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Content Creation</span>
-                    <h3 class="text-2xl font-serif">Luxe Fashion Week</h3>
+            <!-- Item 4 - Weddings -->
+            <div class="portfolio-item-wrapper" data-category="weddings">
+                <div class="portfolio-item relative overflow-hidden rounded-3xl aspect-[4/5] bg-zinc-900 group">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" 
+                         class="w-full h-full object-cover" alt="Wedding">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
+                        <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Full Management</span>
+                        <h3 class="text-3xl font-serif italic">The Estate Reception</h3>
+                    </div>
                 </div>
             </div>
 
-             <!-- Item 5 - Modern Wedding -->
-             <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-[4/5] lg:translate-y-[-100px]">
-                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" 
-                     class="w-full h-full object-cover" alt="Reception">
-                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
-                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Private Celebration</span>
-                    <h3 class="text-2xl font-serif">The Estate Reception</h3>
+            <!-- Item 5 - Corporate -->
+            <div class="portfolio-item-wrapper" data-category="corporate">
+                <div class="portfolio-item relative overflow-hidden rounded-3xl aspect-[4/5] bg-zinc-900 group">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80" 
+                         class="w-full h-full object-cover" alt="Corporate">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
+                        <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Brand Launch</span>
+                        <h3 class="text-3xl font-serif italic">Luxe Fashion Week</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6 - Social -->
+            <div class="portfolio-item-wrapper" data-category="social">
+                <div class="portfolio-item relative overflow-hidden rounded-3xl aspect-[4/5] bg-zinc-900 group">
+                    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80" 
+                         class="w-full h-full object-cover" alt="Social">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
+                        <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Real-time Reels</span>
+                        <h3 class="text-3xl font-serif italic">Summer Rooftop Series</h3>
+                    </div>
                 </div>
             </div>
 
@@ -127,21 +161,77 @@
 
     <!-- CALL TO ACTION -->
     <section class="py-32 bg-zinc-950 text-center px-6">
-        <h2 class="reveal text-4xl md:text-5xl font-serif italic mb-10">Inspired by what you see?</h2>
-        <a href="index.html#contact" class="reveal inline-block bg-white text-black px-12 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-amber-500 hover:text-white transition-all duration-500">
+        <h2 class="reveal text-4xl md:text-6xl font-serif italic mb-10">Have a vision in mind?</h2>
+        <a href="index.html#contact" class="reveal inline-block bg-white text-black px-12 py-5 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-amber-500 hover:text-white transition-all duration-700">
             Start Your Project
         </a>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-12 text-center border-t border-white/5">
-        <p class="text-[10px] uppercase tracking-[0.4em] text-gray-600">EventographyByAK — Curating the Extraordinary</p>
+    <footer class="py-12 text-center border-t border-white/5 bg-black">
+        <p class="text-[10px] uppercase tracking-[0.4em] text-gray-600">© 2026 EventographyByAK — Designed for Excellence</p>
     </footer>
 
     <script>
+        // Initialize Icons
         lucide.createIcons();
-        ScrollReveal().reveal('.reveal', { delay: 200, distance: '30px', origin: 'bottom', duration: 1000 });
-        ScrollReveal().reveal('.reveal-up', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000, interval: 150 });
+
+        // Custom Cursor Logic
+        const cursor = document.querySelector('#cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover effect for cursor
+        document.querySelectorAll('button, a, .portfolio-item').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2.5)';
+                cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // --- FILTERING LOGIC ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item-wrapper');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Toggle active classes
+                filterButtons.forEach(button => {
+                    button.classList.remove('text-amber-500', 'border-b', 'border-amber-500');
+                    button.classList.add('text-gray-500');
+                });
+                btn.classList.add('text-amber-500', 'border-b', 'border-amber-500');
+                btn.classList.remove('text-gray-500');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 400); // Wait for transition
+                    }
+                });
+            });
+        });
+
+        // Scroll Reveal Animations
+        ScrollReveal().reveal('.reveal', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000 });
+        ScrollReveal().reveal('.portfolio-item-wrapper', { delay: 100, distance: '60px', origin: 'bottom', duration: 1000, interval: 100 });
     </script>
 </body>
 </html>
