@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | EventographyByAK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .glass { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(12px); }
+        
+        /* Portfolio Hover Effect */
+        .portfolio-item img { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
+        .portfolio-item:hover img { transform: scale(1.08); }
+        .portfolio-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+        /* Custom scrollbar for premium feel */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif tracking-[0.2em] uppercase">
+                Eventography<span class="text-amber-500">ByAK</span>
+            </a>
+            <div class="hidden md:flex space-x-10 text-xs uppercase tracking-[0.2em] text-gray-400">
+                <a href="index.html" class="hover:text-amber-500 transition">Home</a>
+                <a href="index.html#services" class="hover:text-amber-500 transition">Services</a>
+                <a href="#" class="text-amber-500">Portfolio</a>
+                <a href="index.html#contact" class="hover:text-amber-500 transition">Contact</a>
+            </div>
+            <a href="index.html#contact" class="hidden md:block border border-amber-500/50 text-amber-500 px-6 py-2 rounded-full text-[10px] uppercase tracking-widest hover:bg-amber-500 hover:text-black transition">
+                Book Event
+            </a>
+        </div>
+    </nav>
+
+    <!-- HEADER SECTION -->
+    <header class="pt-40 pb-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="reveal text-amber-500 tracking-[0.4em] uppercase text-[10px] mb-4">Our Visual Legacy</p>
+            <h1 class="reveal text-5xl md:text-7xl font-serif italic mb-8">Selected Works</h1>
+            <div class="h-[1px] w-20 bg-amber-500 mx-auto mb-10"></div>
+            
+            <!-- Category Filter -->
+            <div class="reveal flex flex-wrap justify-center gap-6 md:gap-12 text-[10px] uppercase tracking-[0.3em] text-gray-500">
+                <button class="hover:text-white transition text-amber-500 border-b border-amber-500 pb-1">All Work</button>
+                <button class="hover:text-white transition pb-1">Weddings</button>
+                <button class="hover:text-white transition pb-1">Corporate</button>
+                <button class="hover:text-white transition pb-1">Social</button>
+                <button class="hover:text-white transition pb-1">Short Films</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PORTFOLIO GRID -->
+    <section class="pb-32 px-4">
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Item 1 - Large Wedding -->
+            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl group lg:col-span-2 aspect-video md:aspect-auto">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80" 
+                     class="w-full h-full object-cover" alt="Luxury Wedding">
+                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-10">
+                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Wedding Coordination</span>
+                    <h3 class="text-3xl font-serif italic">The Grand Palace Union</h3>
+                </div>
+            </div>
+
+            <!-- Item 2 - Corporate -->
+            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-square">
+                <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80" 
+                     class="w-full h-full object-cover" alt="Corporate Event">
+                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
+                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Corporate Branding</span>
+                    <h3 class="text-2xl font-serif">TechSummit Global 2025</h3>
+                </div>
+            </div>
+
+            <!-- Item 3 - Content Creation -->
+            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-[4/5]">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80" 
+                     class="w-full h-full object-cover" alt="Gala Night">
+                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
+                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Social Coverage</span>
+                    <h3 class="text-2xl font-serif">Midnight Gala Aftermovie</h3>
+                </div>
+            </div>
+
+            <!-- Item 4 - Detail Shot -->
+            <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-square">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80" 
+                     class="w-full h-full object-cover" alt="Fashion Event">
+                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
+                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Content Creation</span>
+                    <h3 class="text-2xl font-serif">Luxe Fashion Week</h3>
+                </div>
+            </div>
+
+             <!-- Item 5 - Modern Wedding -->
+             <div class="reveal-up portfolio-item relative overflow-hidden rounded-2xl aspect-[4/5] lg:translate-y-[-100px]">
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" 
+                     class="w-full h-full object-cover" alt="Reception">
+                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
+                    <span class="text-amber-500 text-[10px] uppercase tracking-widest mb-2">Private Celebration</span>
+                    <h3 class="text-2xl font-serif">The Estate Reception</h3>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="py-32 bg-zinc-950 text-center px-6">
+        <h2 class="reveal text-4xl md:text-5xl font-serif italic mb-10">Inspired by what you see?</h2>
+        <a href="index.html#contact" class="reveal inline-block bg-white text-black px-12 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-amber-500 hover:text-white transition-all duration-500">
+            Start Your Project
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 text-center border-t border-white/5">
+        <p class="text-[10px] uppercase tracking-[0.4em] text-gray-600">EventographyByAK — Curating the Extraordinary</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        ScrollReveal().reveal('.reveal', { delay: 200, distance: '30px', origin: 'bottom', duration: 1000 });
+        ScrollReveal().reveal('.reveal-up', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000, interval: 150 });
+    </script>
+</body>
+</html>
