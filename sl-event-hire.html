@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>S&L Event Hire and Styling — Wedding & Event Styling Australia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─────────────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────────────── */
+    :root {
+      --blush:        #f5d0c5;
+      --blush-light:  #fce8e2;
+      --blush-mid:    #edb8a8;
+      --ivory:        #fdf8f2;
+      --ivory-dark:   #f0e6d8;
+      --taupe-bg:     #c4ae98;   /* the warm tan section from reference */
+      --taupe-dark:   #a89278;
+      --gold:         #c9a96e;
+      --gold-light:   #e2cda0;
+      --gold-dark:    #a07840;
+      --warm-white:   #fffcf9;
+      --charcoal:     #2a2018;
+      --text-dark:    #3a2e28;
+      --text-mid:     #6b5547;
+      --text-light:   #9c806f;
+      --shadow-soft:  0 8px 40px rgba(180,130,100,0.13);
+      --shadow-gold:  0 4px 20px rgba(201,169,110,0.28);
+      --radius:       12px;
+      --ease:         cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Lato',sans-serif;
+      background:var(--warm-white);
+      color:var(--text-dark);
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+    h1,h2,h3,h4 { font-family:'Playfair Display',serif; }
+    a { text-decoration:none; color:inherit; }
+    img { display:block; max-width:100%; }
+
+    /* ─────────────────────────────────────────────────
+       REVEAL ANIMATION
+    ───────────────────────────────────────────────── */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .rd1{transition-delay:.12s} .rd2{transition-delay:.24s}
+    .rd3{transition-delay:.36s} .rd4{transition-delay:.48s}
+
+    /* ─────────────────────────────────────────────────
+       SHARED HELPERS
+    ───────────────────────────────────────────────── */
+    .container { max-width:1140px; margin:0 auto; }
+    section { padding:100px 24px; }
+
+    .script-label {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic;
+      font-size:1.4rem;
+      color:var(--gold);
+      display:block;
+      margin-bottom:4px;
+      letter-spacing:.5px;
+    }
+    .section-heading {
+      font-size:clamp(2rem,4vw,3.2rem);
+      font-weight:600;
+      color:var(--text-dark);
+      line-height:1.1;
+      margin-bottom:16px;
+      letter-spacing:-.3px;
+    }
+    .section-heading em { font-style:italic; color:var(--gold); }
+    .gold-divider {
+      width:52px; height:2px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-light));
+      margin:0 auto 36px;
+    }
+    .gold-divider.left { margin:0 0 28px; }
+
+    /* ─────────────────────────────────────────────────
+       BUTTONS
+    ───────────────────────────────────────────────── */
+    .btn {
+      display:inline-block;
+      padding:13px 34px;
+      font-family:'Lato',sans-serif;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2.5px;
+      text-transform:uppercase;
+      border-radius:3px;
+      cursor:pointer;
+      transition:.35s var(--ease);
+      border:none;
+    }
+    .btn-gold {
+      background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+      color:#fff;
+      box-shadow:var(--shadow-gold);
+    }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(201,169,110,.5); }
+    .btn-white {
+      background:transparent;
+      color:#fff;
+      border:1.5px solid rgba(255,255,255,.75);
+    }
+    .btn-white:hover { background:rgba(255,255,255,.12); }
+    .btn-outline-dark {
+      background:transparent;
+      color:var(--text-dark);
+      border:1.5px solid var(--text-dark);
+    }
+    .btn-outline-dark:hover { background:var(--text-dark); color:#fff; }
+    .btn-outline-taupe {
+      background:transparent;
+      color:var(--charcoal);
+      border:1.5px solid var(--charcoal);
+      letter-spacing:2px;
+    }
+    .btn-outline-taupe:hover { background:var(--charcoal); color:#fff; }
+
+    /* ─────────────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────────────── */
+    #navbar {
+      position:fixed; top:0; left:0; right:0; z-index:500;
+      padding:16px 48px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:transparent;
+      transition:.4s var(--ease);
+    }
+    #navbar.scrolled {
+      background:rgba(42,32,24,0.94);
+      backdrop-filter:blur(14px);
+      box-shadow:0 2px 20px rgba(0,0,0,.18);
+    }
+    .nav-logo {
+      font-family:'Playfair Display',serif;
+      font-size:1.2rem;
+      font-style:italic;
+      color:#fff;
+      line-height:1.2;
+    }
+    .nav-logo small {
+      display:block;
+      font-style:normal;
+      font-family:'Lato',sans-serif;
+      font-size:.62rem;
+      font-weight:700;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      color:var(--gold-light);
+      margin-top:1px;
+    }
+    .nav-links { display:flex; gap:30px; list-style:none; }
+    .nav-links a {
+      font-size:10.5px; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:rgba(255,255,255,.8);
+      transition:color .3s;
+    }
+    .nav-links a:hover { color:var(--gold-light); }
+    .hamburger {
+      display:none; flex-direction:column; gap:5px;
+      cursor:pointer; background:none; border:none; padding:4px;
+    }
+    .hamburger span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; }
+
+    /* ─────────────────────────────────────────────────
+       HERO  — dark photo + curved wave cutout
+    ───────────────────────────────────────────────── */
+    #hero {
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+      padding:0 24px;
+    }
+
+    /* Simulated real-venue dark photo background */
+    .hero-photo {
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to bottom,
+          rgba(20,14,10,0.48) 0%,
+          rgba(20,14,10,0.15) 38%,
+          rgba(20,14,10,0.42) 78%,
+          rgba(20,14,10,0.68) 100%),
+        url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&fit=crop') center center / cover no-repeat;
+    }
+    /* Arch / chapel silhouette at top center — like the tent venue in reference */
+    .hero-arch-sim {
+      position:absolute; top:0; left:50%; transform:translateX(-50%);
+      width:380px; height:55%;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(180,200,150,0.18) 0%, transparent 70%);
+      border-radius:0 0 50% 50% / 0 0 30% 30%;
+      pointer-events:none; z-index:1;
+    }
+    /* Scattered floral dots top-left/right */
+    .hero-floral {
+      position:absolute; inset:0; pointer-events:none; z-index:1;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(200,220,160,0.12) 0%, transparent 20%),
+        radial-gradient(circle at 90% 18%, rgba(200,220,160,0.10) 0%, transparent 18%),
+        radial-gradient(circle at 5%  50%, rgba(180,200,140,0.08) 0%, transparent 15%),
+        radial-gradient(circle at 95% 55%, rgba(180,200,140,0.08) 0%, transparent 15%);
+    }
+
+    .hero-content {
+      position:relative; z-index:10;
+      max-width:720px;
+    }
+    .hero-pre {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic;
+      font-size:1.1rem;
+      color:rgba(255,255,255,.65);
+      letter-spacing:1px;
+      display:block;
+      margin-bottom:18px;
+    }
+    .hero-title {
+      font-size:clamp(2.8rem,7.5vw,6.2rem);
+      font-weight:700;
+      color:#fff;
+      line-height:1;
+      margin-bottom:4px;
+      letter-spacing:-.5px;
+      text-shadow:0 2px 20px rgba(0,0,0,.4);
+    }
+    .hero-title .amp-design {
+      display:block;
+      font-style:italic;
+      font-weight:400;
+      font-size:clamp(2.4rem,6.5vw,5.4rem);
+      color:var(--gold-light);
+      line-height:1.1;
+    }
+    .hero-body {
+      font-size:clamp(.88rem,1.5vw,1rem);
+      color:rgba(255,255,255,.72);
+      max-width:480px;
+      margin:20px auto 38px;
+      line-height:1.75;
+    }
+
+    /*
+      THE KEY EFFECT FROM REFERENCE:
+      Bottom curved "cutout" — the hero photo appears to be
+      cut with a concave curve that reveals the taupe section below.
+      We achieve this with an SVG wave that matches the taupe background.
+    */
+    .hero-curve {
+      position:absolute; bottom:-2px; left:0; right:0; z-index:20; line-height:0;
+    }
+    .hero-curve svg { display:block; width:100%; }
+
+    /* ─────────────────────────────────────────────────
+       ABOUT  — warm taupe background (matches reference)
+    ───────────────────────────────────────────────── */
+    #about {
+      background:
+        linear-gradient(rgba(196,174,152,0.88), rgba(168,146,120,0.92)),
+        url('https://images.unsplash.com/photo-1550005809-91ad75fb315f?w=1400&q=70&fit=crop') center/cover no-repeat;
+      padding:80px 24px 100px;
+      text-align:center;
+      position:relative;
+    }
+    #about .script-label { color:rgba(255,255,255,.8); font-size:1.6rem; margin-bottom:8px; }
+    #about .section-heading {
+      color:#fff;
+      font-size:clamp(1.8rem,4vw,3rem);
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      margin-bottom:20px;
+    }
+    #about .section-heading em { color:rgba(255,255,255,.85); font-style:italic; font-weight:400; }
+    #about p {
+      color:rgba(255,255,255,.8);
+      font-size:.97rem;
+      max-width:560px;
+      margin:0 auto 32px;
+      line-height:1.85;
+    }
+    /* wave on bottom of about to transition into white */
+    .about-curve-bottom {
+      position:absolute; bottom:-2px; left:0; right:0; z-index:10; line-height:0;
+    }
+    .about-curve-bottom svg { display:block; width:100%; }
+
+    /* ─────────────────────────────────────────────────
+       FULL-WIDTH GALLERY SLIDER  (edge-to-edge, no padding)
+       Sits directly below about section
+    ───────────────────────────────────────────────── */
+    #gallery-slider {
+      padding:0;
+      background:var(--warm-white);
+      position:relative;
+      overflow:hidden;
+    }
+    .slider-track-wrap {
+      overflow:hidden;
+      position:relative;
+    }
+    .slider-track {
+      display:flex;
+      transition:transform .65s var(--ease);
+      cursor:grab;
+    }
+    .slider-track:active { cursor:grabbing; }
+    .slide-item {
+      min-width:33.3333%;
+      flex-shrink:0;
+      aspect-ratio:4/3;
+      position:relative;
+      overflow:hidden;
+    }
+    /* Each slide gets a unique lush CSS gradient simulating a real photo */
+    .slide-item .s-bg { position:absolute; inset:0; transition:transform .6s ease; }
+    .slide-item:hover .s-bg { transform:scale(1.04); }
+
+    .s1 .s-bg {
+      background: url('https://images.unsplash.com/photo-1522413452208-996ff3f3e740?w=900&q=80&fit=crop') center/cover no-repeat;
+    }
+    .s2 .s-bg {
+      background: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80&fit=crop') center/cover no-repeat;
+    }
+    .s3 .s-bg {
+      background: url('https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=900&q=80&fit=crop') center/cover no-repeat;
+    }
+    .s4 .s-bg {
+      background: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80&fit=crop') center/cover no-repeat;
+    }
+    .s5 .s-bg {
+      background: url('https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=900&q=80&fit=crop') center/cover no-repeat;
+    }
+    .s6 .s-bg {
+      background: url('https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=900&q=80&fit=crop') center/cover no-repeat;
+    }
+    /* Dark scrim + caption on hover */
+    .slide-caption {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(30,22,16,.65) 0%, transparent 55%);
+      display:flex; align-items:flex-end; padding:24px 22px;
+      opacity:0; transition:opacity .4s;
+    }
+    .slide-item:hover .slide-caption { opacity:1; }
+    .slide-caption span {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; color:#fff; font-size:1.1rem;
+    }
+    /* Inner shimmer */
+    .slide-item::after {
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,.07) 0%, transparent 40%);
+      pointer-events:none;
+    }
+
+    /* Arrow buttons overlaid on slider */
+    .slider-arrow {
+      position:absolute; top:50%; transform:translateY(-50%);
+      z-index:20; width:46px; height:46px;
+      background:rgba(255,255,255,.9);
+      border:none; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:.3s var(--ease);
+      box-shadow:0 4px 16px rgba(0,0,0,.15);
+    }
+    .slider-arrow:hover { background:#fff; transform:translateY(-50%) scale(1.06); }
+    .slider-arrow.prev { left:20px; }
+    .slider-arrow.next { right:20px; }
+    .slider-arrow svg path { stroke:var(--text-dark); }
+
+    /* dots */
+    .slider-dots {
+      display:flex; justify-content:center; gap:8px;
+      padding:20px 0 32px;
+      background:var(--warm-white);
+    }
+    .sdot {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--taupe-bg); cursor:pointer; transition:.3s;
+    }
+    .sdot.on { background:var(--gold); width:24px; border-radius:4px; }
+
+    /* ─────────────────────────────────────────────────
+       QUOTE BANNER  (below slider, dark charcoal bg)
+    ───────────────────────────────────────────────── */
+    #quote-banner {
+      background:var(--charcoal);
+      padding:72px 24px;
+      text-align:center;
+      position:relative;
+    }
+    #quote-banner::before {
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse at 25% 50%, rgba(201,169,110,.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 50%, rgba(245,208,197,.04) 0%, transparent 55%);
+    }
+    .quote-text {
+      position:relative; z-index:1;
+      max-width:860px; margin:0 auto;
+      font-family:'Lato',sans-serif;
+      font-size:clamp(.78rem,1.3vw,.88rem);
+      font-weight:700;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.72);
+      line-height:2;
+    }
+    .quote-text .hl { color:var(--gold-light); }
+
+    /* ─────────────────────────────────────────────────
+       MARQUEE STRIP
+    ───────────────────────────────────────────────── */
+    .marquee-strip {
+      background:var(--charcoal);
+      border-top:1px solid rgba(201,169,110,.15);
+      padding:13px 0;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+    .marquee-track { display:inline-flex; animation:marquee 30s linear infinite; }
+    .m-item {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:1.05rem;
+      color:rgba(255,255,255,.6); padding:0 28px;
+    }
+    .m-dot { color:var(--gold); padding:0 6px; }
+    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ─────────────────────────────────────────────────
+       SERVICES  — original 3-card grid layout KEPT
+    ───────────────────────────────────────────────── */
+    #services {
+      background:var(--warm-white);
+      text-align:center;
+    }
+    .services-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:28px;
+      margin-top:56px;
+    }
+    .service-card {
+      background:var(--ivory);
+      border:1px solid rgba(201,169,110,.2);
+      border-radius:var(--radius);
+      padding:48px 36px;
+      transition:.4s var(--ease);
+      position:relative; overflow:hidden;
+    }
+    .service-card::before {
+      content:''; position:absolute;
+      top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg,var(--blush),var(--gold),var(--blush));
+      transform:scaleX(0); transition:transform .4s;
+    }
+    .service-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-soft); }
+    .service-card:hover::before { transform:scaleX(1); }
+    .svc-icon {
+      width:64px; height:64px; margin:0 auto 24px;
+      background:linear-gradient(135deg,var(--blush-light),var(--ivory-dark));
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(201,169,110,.25);
+    }
+    .svc-icon svg { width:28px; height:28px; }
+    .service-card h3 { font-size:1.35rem; font-weight:500; color:var(--text-dark); margin-bottom:14px; }
+    .service-card p { font-size:.95rem; color:var(--text-light); line-height:1.75; }
+
+    /* ─────────────────────────────────────────────────
+       HOW IT WORKS  — original 3-step layout KEPT
+    ───────────────────────────────────────────────── */
+    #how-it-works {
+      background:linear-gradient(160deg,var(--ivory) 0%,var(--blush-light) 50%,var(--ivory-dark) 100%);
+      text-align:center;
+    }
+    .steps-wrapper {
+      display:flex; gap:0; align-items:flex-start;
+      justify-content:center; margin-top:64px;
+      position:relative;
+    }
+    .steps-wrapper::before {
+      content:''; position:absolute;
+      top:52px;
+      left:calc(16.66% + 24px); right:calc(16.66% + 24px);
+      height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold-light),transparent);
+    }
+    .step { flex:1; max-width:320px; padding:0 32px; }
+    .step-number {
+      width:104px; height:104px; margin:0 auto 28px;
+      background:linear-gradient(135deg,var(--blush-light),var(--ivory));
+      border:2px solid var(--gold-light); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; z-index:1;
+    }
+    .step-number span {
+      font-family:'Playfair Display',serif;
+      font-size:2rem; font-weight:400; color:var(--gold);
+    }
+    .step h3 { font-size:1.35rem; font-weight:500; margin-bottom:12px; color:var(--text-dark); }
+    .step p { font-size:.95rem; color:var(--text-light); line-height:1.75; }
+
+    /* ─────────────────────────────────────────────────
+       PACKAGES
+    ───────────────────────────────────────────────── */
+    #packages {
+      background:var(--ivory);
+      text-align:center;
+    }
+    .pkg-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:24px; margin-top:56px;
+    }
+    .pkg-card {
+      background:var(--warm-white);
+      border:1px solid rgba(201,169,110,.22);
+      border-radius:var(--radius); padding:40px 30px;
+      transition:.4s var(--ease); position:relative; overflow:hidden;
+      text-align:left;
+    }
+    .pkg-card.featured {
+      background:var(--charcoal);
+      border-color:var(--gold);
+    }
+    .pkg-card:hover:not(.featured) { transform:translateY(-5px); box-shadow:var(--shadow-soft); }
+    .pkg-badge {
+      position:absolute; top:14px; right:14px;
+      background:var(--gold); color:#fff;
+      font-size:9px; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; padding:4px 10px; border-radius:20px;
+    }
+    .pkg-eyebrow { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.95rem; color:var(--gold); display:block; margin-bottom:4px; }
+    .pkg-card h3 { font-size:1.4rem; font-weight:500; color:var(--text-dark); margin-bottom:12px; }
+    .pkg-card.featured h3, .pkg-card.featured p, .pkg-card.featured li { color:rgba(255,255,255,.9) !important; }
+    .pkg-card.featured .pkg-eyebrow { color:var(--gold-light); }
+    .pkg-rule { width:36px; height:1.5px; background:var(--gold); margin-bottom:16px; }
+    .pkg-card p { font-size:.88rem; color:var(--text-light); line-height:1.75; margin-bottom:16px; }
+    .pkg-inc { font-size:9.5px; letter-spacing:2px; font-weight:700; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+    .pkg-card.featured .pkg-inc { color:var(--gold-light); }
+    .pkg-list { list-style:none; margin-bottom:26px; }
+    .pkg-list li { font-size:.87rem; color:var(--text-mid); padding:5px 0; border-bottom:1px solid rgba(201,169,110,.15); display:flex; align-items:center; gap:9px; }
+    .pkg-list li::before { content:'✦'; font-size:7px; color:var(--gold); flex-shrink:0; }
+    .pkg-price { font-family:'Playfair Display',serif; font-size:.85rem; color:var(--text-light); margin-bottom:20px; }
+    .pkg-price strong { font-size:1.9rem; color:var(--text-dark); }
+    .pkg-card.featured .pkg-price strong { color:#fff; }
+    .pkg-card.featured .pkg-price { color:rgba(255,255,255,.5); }
+
+    /* ─────────────────────────────────────────────────
+       TESTIMONIALS
+    ───────────────────────────────────────────────── */
+    #testimonials {
+      background:var(--warm-white);
+      text-align:center;
+    }
+    .testi-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:24px; margin-top:52px;
+    }
+    .t-card {
+      background:var(--ivory);
+      border:1px solid rgba(201,169,110,.2);
+      border-radius:var(--radius); padding:40px 36px;
+      text-align:left; transition:.4s var(--ease);
+    }
+    .t-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-soft); }
+    .t-stars { color:var(--gold); font-size:16px; letter-spacing:2px; margin-bottom:14px; }
+    .t-qmark { font-family:'Playfair Display',serif; font-size:5rem; color:var(--blush); line-height:.4; display:block; height:30px; margin-bottom:16px; }
+    .t-card p { font-size:.96rem; line-height:1.82; color:var(--text-mid); font-style:italic; margin-bottom:22px; }
+    .t-reviewer { display:flex; align-items:center; gap:13px; }
+    .t-avatar {
+      width:44px; height:44px; border-radius:50%;
+      object-fit:cover; flex-shrink:0;
+      border: 2px solid var(--gold-light);
+    }
+    .t-name { font-weight:700; font-size:.92rem; color:var(--text-dark); }
+    .t-event { font-size:.8rem; color:var(--text-light); }
+    .t-card.dark {
+      background:var(--charcoal);
+      grid-column:1/-1;
+      text-align:center; padding:48px;
+    }
+    .t-card.dark p { color:rgba(255,255,255,.82); max-width:680px; margin:0 auto 22px; font-size:1rem; }
+    .t-card.dark .t-stars { font-size:18px; }
+    .t-card.dark .t-name { color:var(--gold-light); }
+    .t-card.dark .t-event { color:rgba(255,255,255,.4); }
+    .t-card.dark .t-reviewer { justify-content:center; }
+    .t-card.dark .t-qmark { color:rgba(201,169,110,.3); }
+
+    /* ─────────────────────────────────────────────────
+       ABOUT DETAILS (second about — with photo)
+    ───────────────────────────────────────────────── */
+    #about-detail {
+      background:var(--ivory);
+    }
+    .about-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:80px; align-items:center;
+    }
+    .about-photo-wrap { position:relative; }
+    .about-photo-box {
+      width:100%; aspect-ratio:4/5;
+      border-radius:var(--radius);
+      background: url('https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80&fit=crop&crop=top') center/cover no-repeat;
+      box-shadow:var(--shadow-soft);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .photo-placeholder { text-align:center; color:rgba(106,85,71,.38); }
+    .photo-placeholder p { font-size:10.5px; letter-spacing:2px; font-weight:700; text-transform:uppercase; margin-top:9px; }
+    .about-corner { position:absolute; }
+    .ac-tl { top:-14px; left:-14px; width:60px; height:60px; border-top:2px solid var(--gold); border-left:2px solid var(--gold); }
+    .ac-br { bottom:-14px; right:-14px; width:60px; height:60px; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold); }
+    .about-accent-box {
+      position:absolute; bottom:-28px; right:-28px;
+      width:130px; height:130px; border-radius:var(--radius);
+      background: url('https://images.unsplash.com/photo-1487530811015-780b7c23b8be?w=300&q=80&fit=crop') center/cover no-repeat;
+      box-shadow:var(--shadow-soft); border:4px solid var(--warm-white);
+    }
+    .about-text-side .script-label, .about-text-side .section-heading, .about-text-side .gold-divider { text-align:left; }
+    .about-text-side p { color:var(--text-mid); font-size:.99rem; line-height:1.85; margin-bottom:13px; }
+    .about-stats { display:flex; gap:28px; margin:28px 0; }
+    .stat { text-align:center; }
+    .stat-n { font-family:'Playfair Display',serif; font-size:2rem; font-weight:600; color:var(--gold); line-height:1; }
+    .stat-l { font-size:.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-top:3px; }
+    .about-sig { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.75rem; color:var(--gold-dark); margin-top:26px; }
+
+    /* ─────────────────────────────────────────────────
+       CONTACT
+    ───────────────────────────────────────────────── */
+    #contact { background:var(--warm-white); }
+    .contact-header { text-align:center; margin-bottom:60px; }
+    .contact-wrap { display:grid; grid-template-columns:1fr 1.4fr; gap:72px; align-items:start; }
+    .contact-info h3 { font-size:1.4rem; font-weight:500; margin-bottom:12px; color:var(--text-dark); }
+    .contact-info p { color:var(--text-light); font-size:.95rem; line-height:1.8; margin-bottom:26px; }
+    .c-row { display:flex; align-items:center; gap:13px; margin-bottom:15px; color:var(--text-mid); font-size:.93rem; }
+    .c-icon { width:37px; height:37px; background:var(--ivory); border:1px solid var(--gold-light); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .c-hours { margin-top:22px; padding:18px; background:var(--ivory); border-radius:var(--radius); border:1px solid rgba(201,169,110,.2); }
+    .c-hours h4 { font-size:.78rem; letter-spacing:2px; font-weight:700; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+    .c-hours p { font-size:.86rem; color:var(--text-light); margin:0; line-height:1.7; }
+    .bk-form { background:var(--ivory); border:1px solid rgba(201,169,110,.18); border-radius:var(--radius); padding:42px 38px; }
+    .f-row { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+    .f-group { margin-bottom:17px; }
+    .f-group label { display:block; font-size:9.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dark); margin-bottom:6px; }
+    .f-group input, .f-group select, .f-group textarea {
+      width:100%; padding:12px 15px;
+      background:var(--warm-white);
+      border:1px solid rgba(201,169,110,.28);
+      border-radius:6px; font-family:'Lato',sans-serif;
+      font-size:.93rem; color:var(--text-dark);
+      outline:none; transition:border-color .3s, box-shadow .3s;
+    }
+    .f-group input::placeholder, .f-group textarea::placeholder { color:#c4a891; }
+    .f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,169,110,.1); }
+    .f-group textarea { resize:vertical; min-height:108px; }
+    .f-submit { width:100%; margin-top:5px; padding:15px; font-size:11.5px; }
+
+    /* ─────────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────────── */
+    footer {
+      background:var(--charcoal);
+      color:rgba(255,255,255,.7);
+      padding:60px 24px 36px;
+      text-align:center;
+    }
+    .f-logo { font-family:'Playfair Display',serif; font-size:1.85rem; font-style:italic; color:var(--gold-light); margin-bottom:4px; }
+    .f-tag { font-size:.78rem; letter-spacing:2.5px; color:rgba(255,255,255,.3); margin-bottom:26px; }
+    .f-rule { width:40px; height:1px; background:var(--gold); margin:0 auto 22px; opacity:.45; }
+    .f-nav { display:flex; justify-content:center; gap:26px; flex-wrap:wrap; margin-bottom:24px; }
+    .f-nav a { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.38); transition:color .3s; }
+    .f-nav a:hover { color:var(--gold-light); }
+    .f-social { display:flex; justify-content:center; gap:12px; margin-bottom:24px; }
+    .f-si { width:40px; height:40px; border-radius:50%; border:1px solid rgba(201,169,110,.3); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.3s var(--ease); }
+    .f-si:hover { background:var(--gold); border-color:var(--gold); }
+    .f-phone { font-size:1rem; color:var(--gold-light); margin-bottom:16px; letter-spacing:1px; }
+    .f-copy { font-size:.73rem; color:rgba(255,255,255,.2); letter-spacing:.8px; }
+
+    /* ─────────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────────── */
+    @media(max-width:980px){
+      .services-grid { grid-template-columns:1fr; max-width:460px; margin:56px auto 0; }
+      .steps-wrapper { flex-direction:column; align-items:center; }
+      .steps-wrapper::before { display:none; }
+      .pkg-grid { grid-template-columns:1fr; max-width:440px; margin:56px auto 0; }
+      .testi-grid { grid-template-columns:1fr; }
+      .t-card.dark { grid-column:1; }
+      .about-grid { grid-template-columns:1fr; gap:48px; }
+      .about-photo-wrap { max-width:420px; margin:0 auto; }
+      .contact-wrap { grid-template-columns:1fr; gap:44px; }
+      .slide-item { min-width:50%; }
+    }
+    @media(max-width:768px){
+      #navbar { padding:14px 20px; }
+      .nav-links { display:none; }
+      .nav-links.open {
+        display:flex; flex-direction:column;
+        position:absolute; top:100%; left:0; right:0;
+        background:rgba(42,32,24,.97);
+        padding:20px 24px; gap:16px;
+      }
+      .hamburger { display:flex; }
+      section { padding:64px 18px; }
+      .f-row { grid-template-columns:1fr; }
+      .bk-form { padding:28px 20px; }
+      .slide-item { min-width:90%; }
+      .about-stats { gap:16px; }
+      .t-card.dark { padding:32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    S&amp;L Event Hire
+    <small>and Styling</small>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#gallery-slider">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ════════════════════════════════════════════════
+     HERO  — dark venue photo + curved cutout bottom
+════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-arch-sim"></div>
+  <div class="hero-floral"></div>
+
+  <div class="hero-content">
+    <span class="hero-pre">S&amp;L Event Hire and Styling · Australia</span>
+    <h1 class="hero-title">
+      EVENT HIRE
+      <span class="amp-design">&amp; Styling</span>
+    </h1>
+    <p class="hero-body">
+      S&amp;L is your premier destination for seamless event coordination
+      and stunning design. With a passionate team dedicated to bringing
+      your vision to life, we handle every aspect of your event with
+      care and expertise. Let us turn your dreams into reality.
+    </p>
+    <a href="#contact" class="btn btn-gold">Enquire Now</a>
+  </div>
+
+  <!-- THE CURVED CUTOUT — concave wave that reveals taupe below -->
+  <div class="hero-curve">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 C240,90 480,90 720,45 C960,0 1200,0 1440,55 L1440,90 L0,90 Z" fill="#c4ae98"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     ABOUT  — warm taupe section (matches reference)
+════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <span class="script-label reveal">About Us</span>
+    <h2 class="section-heading reveal">ELEVATE YOUR <em>EVENTS</em></h2>
+    <p class="reveal rd1">
+      We specialise in exquisite event planning and design, transforming ordinary occasions into
+      extraordinary experiences. From intimate gatherings to grand affairs, we curate every detail with
+      precision and creativity, ensuring your event is nothing short of magical.
+    </p>
+    <a href="#about-detail" class="btn btn-outline-taupe reveal rd2"
+       style="background:transparent;color:rgba(255,255,255,.9);border-color:rgba(255,255,255,.6);">
+      More About Us
+    </a>
+  </div>
+
+  <!-- wave back to white/ivory -->
+  <div class="about-curve-bottom">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,35 C360,70 1080,0 1440,35 L1440,70 L0,70 Z" fill="#fffcf9"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     FULL-WIDTH GALLERY SLIDER  (edge-to-edge)
+════════════════════════════════════════════════ -->
+<div id="gallery-slider">
+  <div class="slider-track-wrap">
+    <div class="slider-track" id="sliderTrack">
+      <div class="slide-item s1">
+        <div class="s-bg"></div>
+        <div class="slide-caption"><span>Bridal Tablescape</span></div>
+      </div>
+      <div class="slide-item s2">
+        <div class="s-bg"></div>
+        <div class="slide-caption"><span>Garden Ceremony</span></div>
+      </div>
+      <div class="slide-item s3">
+        <div class="s-bg"></div>
+        <div class="slide-caption"><span>Floral Arch</span></div>
+      </div>
+      <div class="slide-item s4">
+        <div class="s-bg"></div>
+        <div class="slide-caption"><span>Reception Styling</span></div>
+      </div>
+      <div class="slide-item s5">
+        <div class="s-bg"></div>
+        <div class="slide-caption"><span>Candle Installation</span></div>
+      </div>
+      <div class="slide-item s6">
+        <div class="s-bg"></div>
+        <div class="slide-caption"><span>Luxury Centrepiece</span></div>
+      </div>
+    </div>
+    <button class="slider-arrow prev" id="slidePrev" aria-label="Previous">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M11 3.5L5.5 9l5.5 5.5" stroke="#3a2e28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="slider-arrow next" id="slideNext" aria-label="Next">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M7 3.5L12.5 9 7 14.5" stroke="#3a2e28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     QUOTE BANNER  (dark, below slider)
+════════════════════════════════════════════════ -->
+<div id="quote-banner">
+  <p class="quote-text reveal">
+    IN THE TAPESTRY OF LIFE, WE'RE ALL CONNECTED. EACH THREAD WOVEN WITH THE NEXT,
+    <span class="hl">CREATING A MASTERPIECE OF MOMENTS, MEMORIES, AND MILESTONES.</span>
+    IT'S IN THE BEAUTY OF SHARED EXPERIENCES, THE WARMTH OF
+    <span class="hl">GENUINE CONNECTIONS,</span> AND THE MAGIC OF
+    UNEXPECTED SURPRISES THAT WE FIND THE TRUE ESSENCE OF LIFE.
+  </p>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     MARQUEE STRIP
+════════════════════════════════════════════════ -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="m-item">Wedding Styling<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Event Hire<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Decoration Setup<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Floral Design<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Venue Styling<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Table Scapes<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Wedding Styling<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Event Hire<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Decoration Setup<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Floral Design<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Venue Styling<span class="m-dot"> ✦ </span></span>
+    <span class="m-item">Table Scapes<span class="m-dot"> ✦ </span></span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     SERVICES  — ORIGINAL 3-CARD LAYOUT (unchanged)
+════════════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <span class="script-label reveal">What We Offer</span>
+    <h2 class="section-heading reveal">Our <em>Signature</em> Services</h2>
+    <div class="gold-divider reveal"></div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="svc-icon">
+          <svg viewBox="0 0 28 28" fill="none">
+            <path d="M14 4v4M14 20v4M4 14h4M20 14h4M6.93 6.93l2.83 2.83M18.24 18.24l2.83 2.83M6.93 21.07l2.83-2.83M18.24 9.76l2.83-2.83"
+              stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="14" cy="14" r="4" stroke="#c9a96e" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3>Event Styling</h3>
+        <p>Full venue transformations tailored to your vision. From corporate galas to milestone birthdays, we create immersive atmospheres you'll never forget.</p>
+      </div>
+
+      <div class="service-card reveal rd1">
+        <div class="svc-icon">
+          <svg viewBox="0 0 28 28" fill="none">
+            <path d="M8 10l2-4h8l2 4" stroke="#c9a96e" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M4 10h20L14 24 4 10z" stroke="#c9a96e" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M10 10l4 14M18 10l-4 14" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Wedding Hire</h3>
+        <p>A curated collection of luxurious hire pieces — arbours, pedestals, candelabras, charger plates and more — available to complete your dream wedding aesthetic.</p>
+      </div>
+
+      <div class="service-card reveal rd2">
+        <div class="svc-icon">
+          <svg viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="3.5" stroke="#c9a96e" stroke-width="1.5"/>
+            <ellipse cx="14" cy="7" rx="2.5" ry="4" stroke="#c9a96e" stroke-width="1.3"/>
+            <ellipse cx="14" cy="21" rx="2.5" ry="4" stroke="#c9a96e" stroke-width="1.3"/>
+            <ellipse cx="7" cy="14" rx="4" ry="2.5" stroke="#c9a96e" stroke-width="1.3"/>
+            <ellipse cx="21" cy="14" rx="4" ry="2.5" stroke="#c9a96e" stroke-width="1.3"/>
+            <ellipse cx="8.93" cy="8.93" rx="2.5" ry="4" transform="rotate(-45 8.93 8.93)" stroke="#c9a96e" stroke-width="1.3"/>
+            <ellipse cx="19.07" cy="19.07" rx="2.5" ry="4" transform="rotate(-45 19.07 19.07)" stroke="#c9a96e" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <h3>Decoration Setup</h3>
+        <p>Let us handle the day-of magic. Our experienced setup crew transforms your venue with precision, care and an eye for exquisite detail — so you can enjoy every moment.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     HOW IT WORKS  — ORIGINAL 3-STEP LAYOUT (unchanged)
+════════════════════════════════════════════════ -->
+<section id="how-it-works">
+  <div class="container">
+    <span class="script-label reveal">The Process</span>
+    <h2 class="section-heading reveal">Simple Steps to Your <em>Perfect Day</em></h2>
+    <div class="gold-divider reveal"></div>
+
+    <div class="steps-wrapper">
+      <div class="step reveal">
+        <div class="step-number"><span>01</span></div>
+        <h3>Enquire</h3>
+        <p>Reach out via our booking form or give us a call. Tell us your vision, event date, and venue so we can start imagining your perfect setting.</p>
+      </div>
+      <div class="step reveal rd1">
+        <div class="step-number"><span>02</span></div>
+        <h3>We Plan</h3>
+        <p>We meet for a consultation — in person or virtually — to design a bespoke styling package that perfectly reflects your aesthetic and budget.</p>
+      </div>
+      <div class="step reveal rd2">
+        <div class="step-number"><span>03</span></div>
+        <h3>You Celebrate</h3>
+        <p>On the day, our team arrives early and handles every detail. You simply arrive, take a breath, and step into the beautiful space we've created just for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     ABOUT DETAIL  — with photo & stats
+════════════════════════════════════════════════ -->
+<section id="about-detail">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo-box"></div>
+        <div class="about-corner ac-tl"></div>
+        <div class="about-corner ac-br"></div>
+        <div class="about-accent-box"></div>
+      </div>
+
+      <div class="about-text-side">
+        <span class="script-label reveal">Our Story</span>
+        <h2 class="section-heading reveal">Styling Your Most <em>Precious</em> Moments</h2>
+        <div class="gold-divider left reveal"></div>
+        <p class="reveal">
+          Welcome to <strong>S&amp;L Event Hire and Styling</strong> — a boutique wedding and event styling studio based in Australia, founded on a deep love of beauty, creativity, and the magic of bringing dreams to life.
+        </p>
+        <p class="reveal rd1">
+          From intimate garden ceremonies to grand reception styling, our team curates every detail with care — from luxe floral centrepieces and custom tablescapes to full venue transformations that leave your guests breathless.
+        </p>
+        <div class="about-stats reveal rd2">
+          <div class="stat"><div class="stat-n">200+</div><div class="stat-l">Events Styled</div></div>
+          <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Years Experience</div></div>
+          <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Happy Clients</div></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;" class="reveal rd3">
+          <a href="#contact" class="btn btn-gold">Book a Consultation</a>
+          <a href="#services" class="btn btn-outline-dark">Our Services</a>
+        </div>
+        <div class="about-sig reveal rd4">— S&amp;L Event Hire &amp; Styling</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     PACKAGES
+════════════════════════════════════════════════ -->
+<section id="packages">
+  <div class="container">
+    <span class="script-label reveal">Tailored Solutions</span>
+    <h2 class="section-heading reveal">Our <em>Packages</em></h2>
+    <div class="gold-divider reveal"></div>
+    <p class="reveal" style="color:var(--text-light);max-width:520px;margin:0 auto;font-size:.96rem;">Every event is unique. Our packages are a starting point — we tailor every detail to your vision and budget.</p>
+
+    <div class="pkg-grid">
+
+      <div class="pkg-card reveal">
+        <span class="pkg-eyebrow">Package 1</span>
+        <h3>Essential Elegance</h3>
+        <div class="pkg-rule"></div>
+        <p>Perfect for intimate gatherings and small celebrations. Everything you need for a beautiful, styled event.</p>
+        <div class="pkg-inc">What's Included</div>
+        <ul class="pkg-list">
+          <li>Consultation &amp; Mood Board</li>
+          <li>Hire Items (up to 20 pieces)</li>
+          <li>Setup &amp; Styling on the Day</li>
+          <li>2-Hour Pack-Down Service</li>
+        </ul>
+        <div class="pkg-price">From <strong>$850</strong></div>
+        <a href="#contact" class="btn btn-outline-dark" style="width:100%;text-align:center;display:block;">Contact Us</a>
+      </div>
+
+      <div class="pkg-card featured reveal rd1">
+        <span class="pkg-badge">Most Popular</span>
+        <span class="pkg-eyebrow">Package 2</span>
+        <h3>Signature Experience</h3>
+        <div class="pkg-rule"></div>
+        <p>Our most loved package — full event styling with premium hire, florals and full-day coordination.</p>
+        <div class="pkg-inc">What's Included</div>
+        <ul class="pkg-list">
+          <li>Full Design Consultation</li>
+          <li>Premium Hire Collection</li>
+          <li>Custom Floral Centrepieces</li>
+          <li>Full-Day Setup &amp; Styling</li>
+          <li>On-Site Coordinator</li>
+          <li>Full Pack-Down Service</li>
+        </ul>
+        <div class="pkg-price">From <strong>$2,200</strong></div>
+        <a href="#contact" class="btn btn-gold" style="width:100%;text-align:center;display:block;">Book Now</a>
+      </div>
+
+      <div class="pkg-card reveal rd2">
+        <span class="pkg-eyebrow">Package 3</span>
+        <h3>Grand Affair</h3>
+        <div class="pkg-rule"></div>
+        <p>The full luxury experience — ideal for weddings and large-scale events that demand every detail be perfect.</p>
+        <div class="pkg-inc">What's Included</div>
+        <ul class="pkg-list">
+          <li>Complete Event Design</li>
+          <li>Unlimited Hire Items</li>
+          <li>Venue Transformation</li>
+          <li>Florals, Arch &amp; Installations</li>
+          <li>Full Weekend Coordination</li>
+          <li>Dedicated Styling Team</li>
+        </ul>
+        <div class="pkg-price">From <strong>$4,500</strong></div>
+        <a href="#contact" class="btn btn-outline-dark" style="width:100%;text-align:center;display:block;">Contact Us</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <span class="script-label reveal">Kind Words</span>
+    <h2 class="section-heading reveal">What Our <em>Clients</em> Say</h2>
+    <div class="gold-divider reveal"></div>
+
+    <div class="testi-grid">
+
+      <div class="t-card reveal">
+        <div class="t-stars">★★★★★</div>
+        <span class="t-qmark">&ldquo;</span>
+        <p>Working with S&amp;L Event Hire and Styling was the best decision we made for our wedding. Every detail was perfectly executed — our venue looked like something out of a magazine. Our guests are still talking about it months later.</p>
+        <div class="t-reviewer">
+          <img class="t-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&fit=crop&crop=face" alt="Emily T."/>
+          <div><div class="t-name">Emily &amp; James T.</div><div class="t-event">Wedding — Bowral, NSW</div></div>
+        </div>
+      </div>
+
+      <div class="t-card reveal rd1">
+        <div class="t-stars">★★★★★</div>
+        <span class="t-qmark">&ldquo;</span>
+        <p>From our first call to the final centrepiece being placed, the entire experience was seamless and so enjoyable. The team truly understood our vision and elevated it beyond anything we could have imagined.</p>
+        <div class="t-reviewer">
+          <img class="t-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80&fit=crop&crop=face" alt="Sophia L."/>
+          <div><div class="t-name">Sophia L.</div><div class="t-event">30th Birthday Gala — Melbourne, VIC</div></div>
+        </div>
+      </div>
+
+      <div class="t-card dark reveal rd2">
+        <div class="t-stars">★★★★★</div>
+        <p>"Our event was absolutely flawless. Thanks to S&amp;L, meticulous planning and flawless execution brought our dream to life. They truly went above and beyond — we couldn't have imagined anything more perfect."</p>
+        <div class="t-reviewer">
+          <img class="t-avatar" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&q=80&fit=crop&crop=face" alt="Jessica W."/>
+          <div><div class="t-name">Jessica W.</div><div class="t-event">Wedding Reception — Sydney, NSW</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-header">
+      <span class="script-label reveal">Get in Touch</span>
+      <h2 class="section-heading reveal">Let's Create Something <em>Beautiful</em></h2>
+      <div class="gold-divider reveal"></div>
+    </div>
+
+    <div class="contact-wrap">
+
+      <div class="contact-info reveal">
+        <h3>Book a Consultation</h3>
+        <p>We'd love to hear about your upcoming event. Fill in your details and we'll be in touch within 24 hours to arrange a complimentary consultation.</p>
+        <div class="c-row">
+          <div class="c-icon"><svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3 3h3l1.5 3.75-1.875 1.125A11.25 11.25 0 009.125 12l1.125-1.875L14.25 11.5V15a1.5 1.5 0 01-1.5 1.5A13.5 13.5 0 011.5 4.5 1.5 1.5 0 013 3z" stroke="#c9a96e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>+61 400 000 000</span>
+        </div>
+        <div class="c-row">
+          <div class="c-icon"><svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3 3.75h12c.825 0 1.5.675 1.5 1.5v7.5c0 .825-.675 1.5-1.5 1.5H3c-.825 0-1.5-.675-1.5-1.5v-7.5c0-.825.675-1.5 1.5-1.5z" stroke="#c9a96e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 5.25l-7.5 5.25L1.5 5.25" stroke="#c9a96e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>hello@slstyling.com.au</span>
+        </div>
+        <div class="c-row">
+          <div class="c-icon"><svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C6.243 1.5 4 3.743 4 6.5c0 4.125 5 10 5 10s5-5.875 5-10c0-2.757-2.243-5-5-5z" stroke="#c9a96e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="6.5" r="1.5" stroke="#c9a96e" stroke-width="1.3"/></svg></div>
+          <span>Servicing All of Australia</span>
+        </div>
+        <div class="c-hours">
+          <h4>Studio Hours</h4>
+          <p>Monday – Friday: 9:00am – 6:00pm<br>Saturday: 10:00am – 4:00pm<br>Sunday: By appointment only</p>
+        </div>
+      </div>
+
+      <div class="bk-form reveal rd1">
+        <div class="f-row">
+          <div class="f-group"><label>Full Name</label><input type="text" placeholder="Your name"/></div>
+          <div class="f-group"><label>Phone Number</label><input type="tel" placeholder="+61 400 000 000"/></div>
+        </div>
+        <div class="f-row">
+          <div class="f-group"><label>Email Address</label><input type="email" placeholder="hello@you.com"/></div>
+          <div class="f-group"><label>Event Date</label><input type="date"/></div>
+        </div>
+        <div class="f-group">
+          <label>Event Type</label>
+          <select>
+            <option value="" disabled selected>Select event type</option>
+            <option>Wedding Ceremony &amp; Reception</option>
+            <option>Engagement Party</option>
+            <option>Birthday Celebration</option>
+            <option>Corporate Event</option>
+            <option>Baby Shower / Bridal Shower</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Tell Us About Your Vision</label>
+          <textarea placeholder="Share your ideas, inspiration, venue, guest count, budget range..."></textarea>
+        </div>
+        <button class="btn btn-gold f-submit">Send Your Enquiry ✦</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer>
+  <div class="f-logo">S&amp;L Event Hire &amp; Styling</div>
+  <div class="f-tag">Creating Unforgettable Moments · Australia</div>
+  <div class="f-rule"></div>
+  <div class="f-nav">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#packages">Packages</a>
+    <a href="#gallery-slider">Portfolio</a>
+    <a href="#how-it-works">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="f-social">
+    <div class="f-si" title="Instagram">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#c9a96e" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="#c9a96e" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r=".5" fill="#c9a96e"/></svg>
+    </div>
+    <div class="f-si" title="Facebook">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="f-si" title="Pinterest">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#c9a96e" stroke-width="1.5"/><path d="M9.5 19.5c.5-2 1-4 1.5-6-.4-.8-.5-2 .5-2.5 1.5-.7 2.5.5 2 2-.3 1 0 2 1 2 2 0 3-3 3-5 0-3-2.5-4.5-5-4-3 .5-4.5 4-3 6 .3.5.2 1-.3 1.2" stroke="#c9a96e" stroke-width="1.3" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+  <div class="f-phone">+61 400 000 000</div>
+  <div class="f-copy">© 2025 S&amp;L Event Hire and Styling. All rights reserved. | ABN 00 000 000 000</div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════ -->
+<script>
+/* ── Hamburger ──────────────────────────────── */
+const ham = document.getElementById('hamburger');
+const nav = document.getElementById('navLinks');
+ham.addEventListener('click', () => nav.classList.toggle('open'));
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+/* ── Navbar scroll style ────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── Scroll Reveal ──────────────────────────── */
+const revEls = document.querySelectorAll('.reveal');
+const revIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revIO.unobserve(e.target); }
+  });
+}, { threshold: 0.09 });
+revEls.forEach(el => revIO.observe(el));
+
+/* ── Gallery Slider ─────────────────────────── */
+(function() {
+  const track    = document.getElementById('sliderTrack');
+  const items    = track.querySelectorAll('.slide-item');
+  const dotsWrap = document.getElementById('sliderDots');
+  let cur = 0;
+
+  const vis = () => {
+    if (window.innerWidth <= 768) return 1;
+    if (window.innerWidth <= 980) return 2;
+    return 3;
+  };
+  const maxPos = () => Math.max(0, items.length - vis());
+
+  /* Build dots */
+  const DOTS = 4;
+  for (let i = 0; i < DOTS; i++) {
+    const d = document.createElement('div');
+    d.className = 'sdot' + (i === 0 ? ' on' : '');
+    d.addEventListener('click', () => {
+      goTo(Math.round(i * maxPos() / (DOTS - 1)));
+    });
+    dotsWrap.appendChild(d);
+  }
+
+  function syncDots() {
+    dotsWrap.querySelectorAll('.sdot').forEach((d, i) => {
+      d.classList.toggle('on', Math.round(i * maxPos() / (DOTS - 1)) === cur);
+    });
+  }
+
+  function goTo(n) {
+    cur = Math.max(0, Math.min(n, maxPos()));
+    const w = track.parentElement.offsetWidth / vis();
+    track.style.transform = `translateX(-${cur * w}px)`;
+    syncDots();
+  }
+
+  document.getElementById('slidePrev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('slideNext').addEventListener('click', () => goTo(cur + 1));
+  window.addEventListener('resize', () => goTo(0));
+
+  /* Touch / drag */
+  let startX = 0, isDragging = false, dragDelta = 0;
+  track.addEventListener('mousedown', e => { isDragging = true; startX = e.clientX; });
+  document.addEventListener('mousemove', e => { if(isDragging) dragDelta = e.clientX - startX; });
+  document.addEventListener('mouseup', () => {
+    if (isDragging) {
+      if (Math.abs(dragDelta) > 50) goTo(dragDelta < 0 ? cur + 1 : cur - 1);
+      isDragging = false; dragDelta = 0;
+    }
+  });
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(diff > 0 ? cur + 1 : cur - 1);
+  });
+})();
+
+/* ── Form Submit Demo ───────────────────────── */
+document.querySelector('.f-submit').addEventListener('click', function(e) {
+  e.preventDefault();
+  this.textContent = '✓ Enquiry Sent!';
+  this.style.background = 'linear-gradient(135deg,#a8c5a0,#7ba876)';
+  setTimeout(() => { this.textContent = 'Send Your Enquiry ✦'; this.style.background = ''; }, 3500);
+});
+</script>
+</body>
+</html>
